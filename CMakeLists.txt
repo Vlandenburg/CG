@@ -15,7 +15,7 @@ elseif(WIN32)
 		target_link_options(${PROJECT_NAME} PRIVATE /subsystem:windows /entry:mainCRTStartup)
 	else()
 		target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wno-missing-field-initializers)
-		target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
+		#target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
 	endif()
 	target_compile_definitions(${PROJECT_NAME} PRIVATE -D_USE_MATH_DEFINES)
 else()
@@ -54,6 +54,14 @@ set(GLFW_LIBRARY_TYPE STATIC)
 set(GLFW_BUILD_EXAMPLES OFF)
 set(GLFW_BUILD_TESTS OFF)
 set(GLFW_BUILD_DOCS OFF)
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG 1.0.1
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(glm)
+target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 
 FetchContent_MakeAvailable(
 	glfw
