@@ -7,14 +7,28 @@
 
 struct Vertex {
     glm::vec3 pos;
-    glm::vec3 color;
+    glm::vec3 normal;
 };
 
-struct UniformBufferObject {
-    alignas(16) glm::mat4 model;
+struct SceneUBO {
     alignas(16) glm::mat4 view;
     alignas(16) glm::mat4 proj;
-    alignas(16) glm::vec4 baseColor;
+    alignas(16) glm::vec4 viewPos;
+    alignas(16) glm::vec4 ambientLight;
+    alignas(16) glm::vec4 dirLightDir;
+    alignas(16) glm::vec4 dirLightColor;
+    alignas(16) glm::vec4 pointLightPos;
+    alignas(16) glm::vec4 pointLightColor;
+    alignas(16) glm::vec4 spotLightPos;
+    alignas(16) glm::vec4 spotLightDir;
+    alignas(16) glm::vec4 spotLightParams;
+};
+
+struct ModelUBO {
+    alignas(16) glm::mat4 model;
+    alignas(16) glm::vec4 albedo;
+    alignas(16) glm::vec4 specularColor;
+    alignas(4)  float shininess;
 };
 
 namespace application {
